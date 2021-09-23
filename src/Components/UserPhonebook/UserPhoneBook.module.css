@@ -1,0 +1,19 @@
+.wrapper {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.list {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}

@@ -1,0 +1,27 @@
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 30px;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.item:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.button {
+    margin-left: 15px;
+    background-color: transparent;
+    border: 1px solid red;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-weight: 600;
+}
+
+.button:hover {
+    background-color: red;
+    color: #fff;
+}

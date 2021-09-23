@@ -1,0 +1,39 @@
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    text-align: left;
+}
+
+.input {
+    padding: 5px 0 5px 15px;
+    width: 150px;
+    border-radius: 20px;
+}
+
+.label-text {
+    display: inline-block;
+    width: 120px;
+}
+
+label:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.button {
+    padding: 10px;
+    margin: 15px auto 0;
+    background-color: transparent;
+    border: 1px solid green;
+    border-radius: 20px;
+}
+
+.button:hover {
+    background-color: green;
+    color: #fff;
+}
