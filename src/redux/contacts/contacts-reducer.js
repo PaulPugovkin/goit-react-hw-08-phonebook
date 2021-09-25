@@ -4,7 +4,7 @@ import {
     changeFilter,
     deleteContact,
     getContacts,
-} from './actions';
+} from './contacts-actions';
 
 const items = createReducer([], {
     [getContacts.fulfilled]: (_, { payload }) => [...payload],

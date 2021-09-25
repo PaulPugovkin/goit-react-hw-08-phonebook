@@ -1,19 +1,19 @@
-import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import { store } from './redux/store.js';
+import { store, persistor } from './redux/store.js';
 import './index.css';
 import 'antd/dist/antd.css';
 import App from './App';
 
 ReactDOM.render(
-    <StrictMode>
-        <BrowserRouter>
-            <Provider store={store}>
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
                 <App />
-            </Provider>
-        </BrowserRouter>
-    </StrictMode>,
+            </BrowserRouter>
+        </PersistGate>
+    </Provider>,
     document.getElementById('root'),
 );

@@ -1,5 +1,5 @@
 import { Menu, Dropdown, Button, Space } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Route } from 'react-router';
 import './Navigation.css';
@@ -10,7 +10,6 @@ import { useHistory } from 'react-router';
 
 export const Navigation = () => {
     const history = useHistory();
-    console.log(history);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -22,13 +21,16 @@ export const Navigation = () => {
         setIsModalVisible(false);
         history.push('/');
     };
+    useEffect(() => {
+        if (history.location.pathname !== '/') setIsModalVisible(true);
+    }, [history.location]);
     const menu = (
         <Menu>
             <Menu.Item onClick={showModal}>
-                {<Link to="/sign-in">Sign in</Link>}
+                {<Link to="/login">Login</Link>}
             </Menu.Item>
             <Menu.Item onClick={showModal}>
-                {<Link to="/sign-up">Sign up</Link>}
+                {<Link to="/register">Sign up</Link>}
             </Menu.Item>
             <Menu.Item>{<Link to="/">Logout</Link>}</Menu.Item>
         </Menu>
@@ -53,8 +55,12 @@ export const Navigation = () => {
                 onCancel={handleCancel}
                 footer={null}
             >
-                <Route path="/sign-in" component={SignForm} />
-                <Route path="/sign-up" component={RegistrationForm} />
+                <Route
+                    path="/login"
+                    onLoad={() => showModal()}
+                    component={SignForm}
+                />
+                <Route path="/register" component={RegistrationForm} />
             </Modal>
             ,
         </div>

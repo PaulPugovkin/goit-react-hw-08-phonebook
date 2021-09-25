@@ -1,28 +1,17 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { getContacts } from './redux/actions';
-import { Route } from 'react-router';
+import { useSelector } from 'react-redux';
 
 import Section from './Components/Section';
 import AddForm from './Components/AddForm';
 import UserPhoneBook from './Components/UserPhonebook';
 import Filter from './Components/Filter';
 import { Navigation } from './Components/Navigation/Navigation';
-import SignForm from './Components/LoginForm';
-import RegisterForm from './Components/RegisterForm/RegisterForm';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loader from 'react-loader-spinner';
 
 function App() {
-    const dispatch = useDispatch();
-
     const { items, isLoading, onError } = useSelector(state => state.contacts);
-
-    useEffect(() => {
-        dispatch(getContacts());
-    }, []);
 
     return (
         <Section>

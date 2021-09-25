@@ -3,7 +3,7 @@ import {
     addNewContact,
     getAllContacts,
     deleteSelectedContact,
-} from '../services/api';
+} from '../../services/api';
 
 export const getContacts = createAsyncThunk(
     'phonebook/getContacts',

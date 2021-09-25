@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeFilter } from '../../redux/actions';
+import { changeFilter } from '../../redux/contacts/contacts-actions';
 import styles from './Filter.module.css';
 
 const Filter = () => {

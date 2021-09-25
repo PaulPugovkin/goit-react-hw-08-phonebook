@@ -1,4 +1,8 @@
-import { Form, Input, Checkbox, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { signUpNewUser } from '../../redux/authorization/auth-operations';
 
 const formItemLayout = {
     labelCol: {
@@ -32,17 +36,29 @@ const tailFormItemLayout = {
 };
 
 const RegistrationForm = () => {
-    const [form] = Form.useForm();
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [userData, setUserData] = useState({});
 
-    const onFinish = values => {
-        console.log('Received values of form: ', values);
+    const handleChange = e => {
+        setUserData(state => ({ ...state, [e.target.name]: e.target.value }));
     };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        try {
+            dispatch(signUpNewUser(userData));
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
     return (
         <Form
             {...formItemLayout}
-            form={form}
+            // form={form}
             name="register"
-            onFinish={onFinish}
+            // onFinish={onFinish}
             scrollToFirstError
         >
             <Form.Item
@@ -59,7 +75,7 @@ const RegistrationForm = () => {
                     },
                 ]}
             >
-                <Input />
+                <Input name="email" onChange={handleChange} />
             </Form.Item>
 
             <Form.Item
@@ -73,7 +89,7 @@ const RegistrationForm = () => {
                 ]}
                 hasFeedback
             >
-                <Input.Password />
+                <Input.Password name="password" onChange={handleChange} />
             </Form.Item>
 
             <Form.Item
@@ -116,31 +132,11 @@ const RegistrationForm = () => {
                     },
                 ]}
             >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                    {
-                        validator: (_, value) =>
-                            value
-                                ? Promise.resolve()
-                                : Promise.reject(
-                                      new Error('Should accept agreement'),
-                                  ),
-                    },
-                ]}
-                {...tailFormItemLayout}
-            >
-                <Checkbox>
-                    I have read the <a href="">agreement</a>
-                </Checkbox>
+                <Input name="name" onChange={handleChange} />
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" onClick={handleSubmit}>
                     Register
                 </Button>
             </Form.Item>

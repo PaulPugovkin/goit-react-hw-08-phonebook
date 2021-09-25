@@ -3,9 +3,6 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
-    const onFinish = values => {
-        console.log('Received values of form: ', values);
-    };
     return (
         <div>
             <Form
@@ -14,7 +11,6 @@ const LoginForm = () => {
                 initialValues={{
                     remember: true,
                 }}
-                onFinish={onFinish}
             >
                 <Form.Item
                     name="username"
