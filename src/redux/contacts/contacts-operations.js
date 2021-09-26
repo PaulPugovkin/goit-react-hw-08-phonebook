@@ -9,6 +9,9 @@ import {
     deleteContactRequest,
     deleteContactSuccess,
     deleteContactError,
+    updateContactRequest,
+    updateContactSuccess,
+    updateContactError,
 } from './contacts-actions';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
@@ -41,4 +44,13 @@ export const deleteContact = id => dispatch => {
         .delete(`/contacts/${id}`)
         .then(() => dispatch(deleteContactSuccess(id)))
         .catch(error => dispatch(deleteContactError(error.message)));
+};
+
+export const updateContact = (id, data) => dispatch => {
+    dispatch(updateContactRequest());
+
+    axios
+        .patch(`/contacts/${id}`, data)
+        .then(({ data }) => dispatch(updateContactSuccess(data)))
+        .catch(error => dispatch(updateContactError(error.message)));
 };

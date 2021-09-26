@@ -93,7 +93,11 @@ const RegistrationForm = ({ onClose }) => {
                 ]}
                 hasFeedback
             >
-                <Input.Password name="password" onChange={handleChange} />
+                <Input.Password
+                    minlength="7"
+                    name="password"
+                    onChange={handleChange}
+                />
             </Form.Item>
 
             <Form.Item

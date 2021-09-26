@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contacts/contacts-operations';
 import { useState } from 'react';
 import styles from './AddForm.module.css';
+import { Input } from 'antd';
 
 function AddForm() {
     const [formData, setFormData] = useState({ name: '', number: '' });
@@ -41,7 +42,7 @@ function AddForm() {
                         <span className={styles['label-text']}>
                             First name:
                         </span>
-                        <input
+                        <Input
                             onChange={onInputChange}
                             className={styles.input}
                             placeholder="Ivanov Ivan"
@@ -57,7 +58,7 @@ function AddForm() {
                         <span className={styles['label-text']}>
                             Phone number:
                         </span>
-                        <input
+                        <Input
                             className={styles.input}
                             placeholder="+7-999-999-99-99"
                             type="tel"
@@ -74,7 +75,10 @@ function AddForm() {
                     </button>
                 </form>
             ) : (
-                <h2>You need to login at first.</h2>
+                <h2 className={styles.title}>
+                    Hello my friend! You need to sign in or sign up in 'Account'
+                    menu at the top of application{' '}
+                </h2>
             )}
         </>
     );

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter } from '../../redux/contacts/contacts-actions';
 import styles from './Filter.module.css';
+import { Input } from 'antd';
 
 const Filter = () => {
     const value = useSelector(state => state.contacts.filter);
@@ -13,7 +14,7 @@ const Filter = () => {
         <div className={styles.wrapper}>
             <label>
                 <span className={styles['label-text']}>Find contact:</span>
-                <input
+                <Input
                     placeholder="Search contact"
                     className={styles.input}
                     type="text"

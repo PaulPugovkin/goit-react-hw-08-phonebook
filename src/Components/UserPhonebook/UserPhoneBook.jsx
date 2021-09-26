@@ -35,7 +35,7 @@ const UserPhoneBook = () => {
             {isLoggedIn && items.length > 0 && (
                 <div className={styles.wrapper}>
                     <Filter />
-                    <h2>Your contacts</h2>
+                    <h2 className={styles.title}>Your contacts</h2>
                     <ul className={styles.list}>
                         {contacts.map(({ id, name, number }) => (
                             <NewContact
@@ -51,7 +51,7 @@ const UserPhoneBook = () => {
             )}
 
             {isLoggedIn && items.length <= 0 && (
-                <h2>There is no contacts yet!</h2>
+                <h2 className={styles.title}>There is no contacts yet!</h2>
             )}
         </>
     );

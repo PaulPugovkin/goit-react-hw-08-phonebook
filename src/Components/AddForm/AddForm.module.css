@@ -17,6 +17,8 @@
 }
 
 .label-text {
+    font-size: 16px;
+    font-weight: 500;
     display: inline-block;
     width: 120px;
 }
@@ -31,9 +33,19 @@ label:not(:last-child) {
     background-color: transparent;
     border: 1px solid green;
     border-radius: 20px;
+
+    font-size: 20px;
+    font-weight: 300;
 }
 
 .button:hover {
     background-color: green;
     color: #fff;
+}
+
+.title {
+    font-size: 50px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
 }

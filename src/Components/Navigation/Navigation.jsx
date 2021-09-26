@@ -2,7 +2,7 @@ import { Menu, Dropdown, Button, Space } from 'antd';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Route, useHistory } from 'react-router';
-import './Navigation.css';
+import styles from './Navigation.module.css';
 import RegistrationForm from '../RegisterForm/RegisterForm';
 import LoginForm from '../LoginForm/LoginForm';
 import { Modal } from 'antd';
@@ -39,10 +39,18 @@ export const Navigation = () => {
             {!isLoggedIn && (
                 <>
                     <Menu.Item onClick={showModal} key="Login">
-                        {<Link to="/login">Login</Link>}
+                        {
+                            <Link className={styles.link} to="/login">
+                                Login
+                            </Link>
+                        }
                     </Menu.Item>
                     <Menu.Item onClick={showModal} key="Sign up">
-                        {<Link to="/register">Sign up</Link>}
+                        {
+                            <Link className={styles.link} to="/register">
+                                Sign up
+                            </Link>
+                        }
                     </Menu.Item>
                 </>
             )}
@@ -50,7 +58,11 @@ export const Navigation = () => {
             {isLoggedIn && (
                 <Menu.Item key="Logout">
                     {
-                        <button type="button" onClick={handleLogout}>
+                        <button
+                            className={styles.link}
+                            type="button"
+                            onClick={handleLogout}
+                        >
                             Logout
                         </button>
                     }
@@ -65,16 +77,17 @@ export const Navigation = () => {
                 <Space wrap>
                     <Dropdown
                         overlay={menu}
-                        placement="topRight"
-                        className="test"
+                        placement="bottomRight"
+                        className={styles.dropdown}
                     >
-                        <Button>{isLoggedIn ? user.name : 'Account'}</Button>
+                        <Button className={styles['dropdown-header']}>
+                            {isLoggedIn ? `Hello! ${user.name}` : 'Account'}
+                        </Button>
                     </Dropdown>
                 </Space>
             </Space>
             <Modal
                 visible={isModalVisible}
-                // onOk={handleOk}
                 onCancel={handleCancel}
                 footer={null}
             >

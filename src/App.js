@@ -11,7 +11,7 @@ import Loader from 'react-loader-spinner';
 
 function App() {
     const { isLoading, onError } = useSelector(state => state.contacts);
-
+    const { error } = useSelector(state => state.auth);
     return (
         <Section>
             <Navigation />
@@ -26,9 +26,12 @@ function App() {
             )}
             <AddForm />
             <UserPhoneBook />
-            {onError !== '' && (
-                <ToastContainer>{toast.error(onError)}</ToastContainer>
-            )}
+            {onError !== '' ||
+                (error !== '' && (
+                    <ToastContainer>
+                        {toast.error(onError || error)}
+                    </ToastContainer>
+                ))}
         </Section>
     );
 }

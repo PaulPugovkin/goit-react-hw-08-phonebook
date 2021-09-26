@@ -10,6 +10,9 @@ import {
     deleteContactRequest,
     deleteContactSuccess,
     deleteContactError,
+    updateContactRequest,
+    updateContactSuccess,
+    updateContactError,
 } from './contacts-actions';
 
 const items = createReducer([], {
@@ -18,6 +21,8 @@ const items = createReducer([], {
     [deleteContactSuccess]: (state, { payload }) => [
         ...state.filter(({ id }) => id !== payload),
     ],
+    [updateContactSuccess]: (state, { payload }) =>
+        state.map(contact => (contact.id === payload.id ? payload : contact)),
 });
 
 const filter = createReducer('', {
@@ -34,6 +39,9 @@ const isLoading = createReducer(false, {
     [deleteContactRequest]: () => true,
     [deleteContactSuccess]: () => false,
     [deleteContactError]: () => false,
+    [updateContactRequest]: () => true,
+    [updateContactSuccess]: () => false,
+    [updateContactError]: () => false,
 });
 
 const onError = createReducer('', {
@@ -43,6 +51,8 @@ const onError = createReducer('', {
     [addContactRequest]: () => '',
     [deleteContactError]: () => 'Something went wrong, try again later',
     [deleteContactRequest]: () => '',
+    [updateContactError]: () => 'Something went wrong, try again later',
+    [updateContactRequest]: () => '',
 });
 
 export default combineReducers({

@@ -1,0 +1,11 @@
+.edit-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    width: 150px;
+    margin: 5px;
+    font-size: 18px;
+    font-weight: 500;
+}
