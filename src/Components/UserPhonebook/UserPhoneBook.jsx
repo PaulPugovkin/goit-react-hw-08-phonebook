@@ -1,9 +1,17 @@
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import NewContact from '../NewContact';
+import Filter from '../Filter';
 import styles from './UserPhoneBook.module.css';
+import {
+    deleteContact,
+    getAllContacts,
+} from '../../redux/contacts/contacts-operations';
 
 const UserPhoneBook = () => {
+    const dispatch = useDispatch();
+
     const getUserContacts = (items, filter) => {
         const normalizedFilter = filter.toLowerCase();
 
@@ -13,17 +21,39 @@ const UserPhoneBook = () => {
     };
 
     const { items, filter } = useSelector(state => state.contacts);
+    const { isLoggedIn } = useSelector(state => state.auth);
     const contacts = getUserContacts(items, filter);
 
+    useEffect(() => {
+        if (isLoggedIn) dispatch(getAllContacts());
+    }, [isLoggedIn]);
+
+    const handleDeleteContact = id => dispatch(deleteContact(id));
+
     return (
-        <div className={styles.wrapper}>
-            <h2>Your contacts</h2>
-            <ul className={styles.list}>
-                {contacts.map(({ id, name, number }) => (
-                    <NewContact key={id} name={name} number={number} id={id} />
-                ))}
-            </ul>
-        </div>
+        <>
+            {isLoggedIn && items.length > 0 && (
+                <div className={styles.wrapper}>
+                    <Filter />
+                    <h2>Your contacts</h2>
+                    <ul className={styles.list}>
+                        {contacts.map(({ id, name, number }) => (
+                            <NewContact
+                                key={id}
+                                name={name}
+                                number={number}
+                                id={id}
+                                onDelete={() => handleDeleteContact(id)}
+                            />
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+            {isLoggedIn && items.length <= 0 && (
+                <h2>There is no contacts yet!</h2>
+            )}
+        </>
     );
 };
 

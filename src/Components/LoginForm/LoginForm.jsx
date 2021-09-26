@@ -1,8 +1,35 @@
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/authorization/auth-operations';
+import { useHistory } from 'react-router';
 
-const LoginForm = () => {
+const LoginForm = ({ onClose }) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const initialState = {
+        email: null,
+        password: null,
+    };
+
+    const [userData, setUserData] = useState(initialState);
+
+    const handleChange = e => {
+        setUserData(state => ({ ...state, [e.target.name]: e.target.value }));
+    };
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        try {
+            dispatch(login(userData));
+            setUserData(initialState);
+            onClose();
+            history.push('/');
+        } catch (error) {}
+    };
     return (
         <div>
             <Form
@@ -17,15 +44,17 @@ const LoginForm = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your Username!',
+                            message: 'Please input your email!',
                         },
                     ]}
                 >
                     <Input
+                        name="email"
+                        onChange={handleChange}
                         prefix={
                             <UserOutlined className="site-form-item-icon" />
                         }
-                        placeholder="Username"
+                        placeholder="email@mail.com"
                     />
                 </Form.Item>
                 <Form.Item
@@ -38,6 +67,8 @@ const LoginForm = () => {
                     ]}
                 >
                     <Input
+                        name="password"
+                        onChange={handleChange}
                         prefix={
                             <LockOutlined className="site-form-item-icon" />
                         }
@@ -53,13 +84,13 @@ const LoginForm = () => {
 
                 <Form.Item>
                     <Button
+                        onClick={handleSubmit}
                         type="primary"
-                        htmlType="submit"
                         className="login-form-button"
                     >
                         Log in
                     </Button>
-                    Or <Link to="/sign-up">register now!</Link>
+                    Or <Link to="/register">register now!</Link>
                 </Form.Item>
             </Form>
         </div>

@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import Section from './Components/Section';
 import AddForm from './Components/AddForm';
 import UserPhoneBook from './Components/UserPhonebook';
-import Filter from './Components/Filter';
 import { Navigation } from './Components/Navigation/Navigation';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from 'react-loader-spinner';
 
 function App() {
-    const { items, isLoading, onError } = useSelector(state => state.contacts);
+    const { isLoading, onError } = useSelector(state => state.contacts);
 
     return (
         <Section>
@@ -26,15 +25,7 @@ function App() {
                 />
             )}
             <AddForm />
-
-            {items.length > 0 ? (
-                <>
-                    <Filter />
-                    <UserPhoneBook />
-                </>
-            ) : (
-                <h2>There is no contacts</h2>
-            )}
+            <UserPhoneBook />
             {onError !== '' && (
                 <ToastContainer>{toast.error(onError)}</ToastContainer>
             )}

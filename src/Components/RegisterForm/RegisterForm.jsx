@@ -2,7 +2,7 @@ import { Form, Input, Button } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import { signUpNewUser } from '../../redux/authorization/auth-operations';
+import { register } from '../../redux/authorization/auth-operations';
 
 const formItemLayout = {
     labelCol: {
@@ -35,10 +35,11 @@ const tailFormItemLayout = {
     },
 };
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ onClose }) => {
     const history = useHistory();
     const dispatch = useDispatch();
-    const [userData, setUserData] = useState({});
+    const initialState = { name: null, password: null, email: null };
+    const [userData, setUserData] = useState(initialState);
 
     const handleChange = e => {
         setUserData(state => ({ ...state, [e.target.name]: e.target.value }));
@@ -47,7 +48,10 @@ const RegistrationForm = () => {
     const handleSubmit = e => {
         e.preventDefault();
         try {
-            dispatch(signUpNewUser(userData));
+            dispatch(register(userData));
+            setUserData(initialState);
+            onClose();
+            history.push('/');
         } catch (error) {
             console.log(error.message);
         }

@@ -1,22 +1,19 @@
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import {
-    addNewContact,
-    getAllContacts,
-    deleteSelectedContact,
-} from '../../services/api';
+import { createAction } from '@reduxjs/toolkit';
 
-export const getContacts = createAsyncThunk(
-    'phonebook/getContacts',
-    async () => await getAllContacts(),
-);
+export const getContactsRequest = createAction('phonebook/getContactsRequest');
+export const getContactsSuccess = createAction('phonebook/getContactsSuccess');
+export const getContactsError = createAction('todos/getContactsError');
 
-export const addContact = createAsyncThunk(
-    'phonebook/add',
-    async (name, number) => await addNewContact(name, number),
-);
+export const addContactRequest = createAction('phonebook/addContactRequest');
+export const addContactSuccess = createAction('phonebook/addContactSuccess');
+export const addContactError = createAction('phonebook/addContactError');
 
-export const deleteContact = createAsyncThunk(
-    'phonebook/delete',
-    async id => await deleteSelectedContact(id),
+export const deleteContactRequest = createAction(
+    'phonebook/deleteContactRequest',
 );
+export const deleteContactSuccess = createAction(
+    'phonebook/deleteContactSuccess',
+);
+export const deleteContactError = createAction('phonebook/deleteContactError');
+
 export const changeFilter = createAction('phonebook/filter');
